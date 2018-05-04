@@ -57,7 +57,15 @@ select sum(valor), data from compra group by data order by sum(valor) desc;
 
 /* alterando dados da tabela */
 
-alter table compra modify column data date default now();
+/*alter table compra modify column data date default now();*/
+
+/*adicionando uma tabela em compra*/
+
+/*alter table compra add column data_entrega datetime default '';*/
+
+/*Alterando uma coluna*/
+
+alter table compra modify column data_entrega datetime default null;
 
 /* juntando tabelas com id em comum*/
 
