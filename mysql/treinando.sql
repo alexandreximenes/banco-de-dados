@@ -20,8 +20,6 @@ create table if not exists compra(
     
 );
 
-/**insert into compra(valor, data, recebido, observacoes, forma_pgto, comprador_id) /
-/*atualizando dados da tabela*/
 update compra set 
 	valor = 1200, 
 	data = now(), 
@@ -34,42 +32,90 @@ where id = 7;
 
 /* Inserindo dados na tabela comprador*/
 
-insert into comprador (nome, telefone) values('alexandre', '33333-333');
+insert into comprador 
+(nome, telefone) 
+values('alexandre', '33333-333');
 
 /* Inserindo dados na tabela compra*/
 
-insert into compra(valor, data, recebido, observacoes, forma_pgto, comprador_id) 
-values (300.00, '2018-05-03', 0, 'compra de camisa', 'dinheiro', 1);
+insert into compra
+(	valor, 
+	data, 
+	recebido, 
+	observacoes, 
+	forma_pgto, 
+	comprador_id
+) 
+values (
+	3800.00, 
+	'2018-05-07', 
+	0, 
+	'compra de computador', 
+	'cartao', 
+	1
+);
                     
-insert into compra(valor, data, recebido, observacoes, forma_pgto, comprador_id) 
-values (1500.00, '2018-05-04', 0, 'compra de celular', 'dinheiro', 1);
-
-insert into compra(valor, data, recebido, observacoes, forma_pgto, comprador_id) 
-values (500.00, '2018-05-05', 0, 'compra peças', 'cartao', 1);
+insert into compra
+(	valor, 
+	data, 
+	recebido, 
+	observacoes, 
+	forma_pgto, 
+	comprador_id
+) 
+values (
+	350.00, 
+	'2018-05-05', 
+	0, 
+	'compra de celular', 
+	'dinheiro', 
+	1
+);
   
 /*selecionando todas as compras;*/
 
-select * from compra;
+select 
+	* 
+from compra;
 
 /*Agrupando valores com group by e ordenando por decrescentes*/  
 
-select sum(valor), data from compra group by data order by sum(valor) desc;
+select 
+	sum(valor), 
+	data 
+from 
+	compra 
+	group by data 
+	order by sum(valor) desc;
 
 /* alterando dados da tabela */
 
-/*alter table compra modify column data date default now();*/
+/*alter table compra 
+	modify column data date 
+    default now();*/
 
 /*adicionando uma tabela em compra*/
 
-/*alter table compra add column data_entrega datetime default '';*/
+/*alter table compra 
+	add column data_entrega datetime 
+    default '';*/
 
 /*Alterando uma coluna*/
 
-alter table compra modify column data_entrega datetime default null;
+alter table compra 
+	modify column data_entrega datetime 
+    default null;
 
 /* juntando tabelas com id em comum*/
 
-select * from compra c left join comprador cp on c.id = cp.id;
+select 
+	* 
+from 
+	compra c 
+left join 
+	comprador cp 
+on 
+	c.id = cp.id;
 
 
 
