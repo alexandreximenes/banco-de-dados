@@ -1,0 +1,232 @@
+mysql> show tables;
++------------------------+
+| Tables_in_financas     |
++------------------------+
+| categoria              |
+| cliente                |
+| conta                  |
+| movimentacao           |
+| movimentacao_categoria |
++------------------------+
+5 rows in set (0.00 sec)
+
+mysql> desc movimentacao;
++------------------+---------------+------+-----+---------+----------------+
+| Field            | Type          | Null | Key | Default | Extra          |
++------------------+---------------+------+-----+---------+----------------+
+| id               | int(11)       | NO   | PRI | NULL    | auto_increment |
+| descricao        | text          | YES  |     | NULL    |                |
+| tipoMovimentacao | varchar(255)  | YES  |     | NULL    |                |
+| valor            | decimal(19,2) | YES  |     | NULL    |                |
+| conta_______id   | int(11)       | YES  | MUL | NULL    |                |
++------------------+---------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> desc conta;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| agencia    | varchar(255) | YES  |     | NULL    |                |
+| banco      | varchar(255) | YES  |     | NULL    |                |
+| numero     | varchar(255) | YES  |     | NULL    |                |
+| cliente_id | int(11)      | YES  | UNI | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.01 sec)
+
+mysql> select * from conta;
++----+---------+-----------------+-----------+--------+-----------+------------+
+| id | agencia | banco           | cpf       | numero | titular   | cliente_id |
++----+---------+-----------------+-----------+--------+-----------+------------+
+|  1 | 001     | Banco do Brasil | 00000000  | 00000  | Alexandre |       NULL |
+|  2 | 341     | Banco Itau      | 11111111  | 11111  | Dayane    |       NULL |
+|  3 | 002     | Banco do Tata   | 222222222 | 22222  | Arthur    |       NULL |
+|  4 | 002     | Banco do Tata   | 33333333  | 22222  | Arthur    |       NULL |
+|  5 | 004     | Banco dos Ricos | 44444444  | 44444  | Marlene   |       NULL |
++----+---------+-----------------+-----------+--------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from conta;
++----+---------+-----------------+-----------+--------+-----------+------------+
+| id | agencia | banco           | cpf       | numero | titular   | cliente_id |
++----+---------+-----------------+-----------+--------+-----------+------------+
+|  1 | 001     | Banco do Brasil | 00000000  | 00000  | Alexandre |          1 |
+|  2 | 341     | Banco Itau      | 11111111  | 11111  | Dayane    |          2 |
+|  3 | 002     | Banco do Tata   | 222222222 | 22222  | Arthur    |          3 |
+|  4 | 002     | Banco do Tata   | 33333333  | 22222  | Arthur    |          4 |
+|  5 | 004     | Banco dos Ricos | 44444444  | 44444  | Marlene   |          5 |
++----+---------+-----------------+-----------+--------+-----------+------------+
+5 rows in set (0.01 sec)
+
+mysql> select * from cliente;
++----+-----------+-------------------+--------------------------+
+| id | endereco  | nome              | profissao                |
++----+-----------+-------------------+--------------------------+
+|  1 | Rua X n Y | Alexandre Ximenes | Analista de sistemas     |
+|  2 | Rua X n Y | Arthur Ximenes    | estudante                |
+|  3 | Rua X n Y | Dayane Ximenes    | Promotora Senior Siemens |
+|  4 | Rua X n Y | Regina Ximenes    | Chefe de cozinha         |
+|  5 | Rua X n Y | Vanderlei Ximenes | Engenheiro Mecanico      |
+|  6 | Rua X n Y | Amanda Ximenes    | bagunceira               |
++----+-----------+-------------------+--------------------------+
+6 rows in set (0.01 sec)
+
+mysql> select * from movimentacao;
++----+--------------------------------------------------------------+------------------+-----------+----------------+
+| id | descricao                                                    | tipoMovimentacao | valor     | conta_______id |
++----+--------------------------------------------------------------+------------------+-----------+----------------+
+|  1 | A movimentação atual refere-se á um deposito Milagroso ..... | ENTRADA          | 151099.00 |              3 |
++----+--------------------------------------------------------------+------------------+-----------+----------------+
+1 row in set (0.01 sec)
+
+mysql> select * from cliente;
++----+-----------+-------------------+--------------------------+
+| id | endereco  | nome              | profissao                |
++----+-----------+-------------------+--------------------------+
+|  1 | Rua X n Y | Alexandre Ximenes | Analista de sistemas     |
+|  2 | Rua X n Y | Arthur Ximenes    | estudante                |
+|  3 | Rua X n Y | Dayane Ximenes    | Promotora Senior Siemens |
+|  4 | Rua X n Y | Regina Ximenes    | Chefe de cozinha         |
+|  5 | Rua X n Y | Vanderlei Ximenes | Engenheiro Mecanico      |
+|  6 | Rua X n Y | Amanda Ximenes    | bagunceira               |
++----+-----------+-------------------+--------------------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from conta;
++----+---------+-----------------+-----------+--------+-----------+------------+
+| id | agencia | banco           | cpf       | numero | titular   | cliente_id |
++----+---------+-----------------+-----------+--------+-----------+------------+
+|  1 | 001     | Banco do Brasil | 00000000  | 00000  | Alexandre |          1 |
+|  2 | 341     | Banco Itau      | 11111111  | 11111  | Dayane    |          2 |
+|  3 | 002     | Banco do Tata   | 222222222 | 22222  | Arthur    |          3 |
+|  4 | 002     | Banco do Tata   | 33333333  | 22222  | Arthur    |          4 |
+|  5 | 004     | Banco dos Ricos | 44444444  | 44444  | Marlene   |          5 |
++----+---------+-----------------+-----------+--------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from movimentacao;
++----+--------------------------------------------------------------+------------------+-----------+----------------+
+| id | descricao                                                    | tipoMovimentacao | valor     | conta_______id |
++----+--------------------------------------------------------------+------------------+-----------+----------------+
+|  1 | A movimentação atual refere-se á um deposito Milagroso ..... | ENTRADA          | 151099.00 |              3 |
++----+--------------------------------------------------------------+------------------+-----------+----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from movimentacao;
+Empty set (0.01 sec)
+
+mysql> select * from conta;
++----+---------+-----------------+-----------+--------+-----------+------------+
+| id | agencia | banco           | cpf       | numero | titular   | cliente_id |
++----+---------+-----------------+-----------+--------+-----------+------------+
+|  1 | 001     | Banco do Brasil | 00000000  | 00000  | Alexandre |          1 |
+|  2 | 341     | Banco Itau      | 11111111  | 11111  | Dayane    |          2 |
+|  3 | 002     | Banco do Tata   | 222222222 | 22222  | Arthur    |          3 |
+|  4 | 002     | Banco do Tata   | 33333333  | 22222  | Arthur    |          4 |
+|  5 | 004     | Banco dos Ricos | 44444444  | 44444  | Marlene   |          5 |
++----+---------+-----------------+-----------+--------+-----------+------------+
+5 rows in set (0.01 sec)
+
+mysql> select * from cliente;
++----+-----------+-------------------+--------------------------+
+| id | endereco  | nome              | profissao                |
++----+-----------+-------------------+--------------------------+
+|  1 | Rua X n Y | Alexandre Ximenes | Analista de sistemas     |
+|  2 | Rua X n Y | Arthur Ximenes    | estudante                |
+|  3 | Rua X n Y | Dayane Ximenes    | Promotora Senior Siemens |
+|  4 | Rua X n Y | Regina Ximenes    | Chefe de cozinha         |
+|  5 | Rua X n Y | Vanderlei Ximenes | Engenheiro Mecanico      |
+|  6 | Rua X n Y | Amanda Ximenes    | bagunceira               |
++----+-----------+-------------------+--------------------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from movimentacao;
++----+--------------------------------------------------------------+------------------+-----------+----------------+
+| id | descricao                                                    | tipoMovimentacao | valor     | conta_______id |
++----+--------------------------------------------------------------+------------------+-----------+----------------+
+|  1 | A movimentação atual refere-se á um deposito Milagroso ..... | ENTRADA          | 151099.00 |              3 |
++----+--------------------------------------------------------------+------------------+-----------+----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from conta;
++----+---------+-----------------+-----------+--------+-----------+------------+
+| id | agencia | banco           | cpf       | numero | titular   | cliente_id |
++----+---------+-----------------+-----------+--------+-----------+------------+
+|  1 | 001     | Banco do Brasil | 00000000  | 00000  | Alexandre |          1 |
+|  2 | 341     | Banco Itau      | 11111111  | 11111  | Dayane    |          2 |
+|  3 | 002     | Banco do Tata   | 222222222 | 22222  | Arthur    |          3 |
+|  4 | 002     | Banco do Tata   | 33333333  | 22222  | Arthur    |          4 |
+|  5 | 004     | Banco dos Ricos | 44444444  | 44444  | Marlene   |          5 |
++----+---------+-----------------+-----------+--------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> desc conta;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| agencia    | varchar(255) | YES  |     | NULL    |                |
+| banco      | varchar(255) | YES  |     | NULL    |                |
+| cpf        | varchar(255) | YES  |     | NULL    |                |
+| numero     | varchar(255) | YES  |     | NULL    |                |
+| titular    | varchar(255) | YES  |     | NULL    |                |
+| cliente_id | int(11)      | NO   | UNI | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from movimentacao m join conta c on c.id = m.conta_______id join cliente cc on c.cliente_id = cc.id;
++----+--------------------------------------------------------------+------------------+-----------+----------------+----+---------+---------------+-----------+--------+---------+------------+----+-----------+----------------+--------------------------+
+| id | descricao                                                    | tipoMovimentacao | valor     | conta_______id | id | agencia | banco         | cpf       | numero | titular | cliente_id | id | endereco  | nome           | profissao                |
++----+--------------------------------------------------------------+------------------+-----------+----------------+----+---------+---------------+-----------+--------+---------+------------+----+-----------+----------------+--------------------------+
+|  1 | A movimentação atual refere-se á um deposito Milagroso ..... | ENTRADA          | 151099.00 |              3 |  3 | 002     | Banco do Tata | 222222222 | 22222  | Arthur  |          3 |  3 | Rua X n Y | Dayane Ximenes | Promotora Senior Siemens |
++----+--------------------------------------------------------------+------------------+-----------+----------------+----+---------+---------------+-----------+--------+---------+------------+----+-----------+----------------+--------------------------+
+1 row in set (0.05 sec)
+
+mysql> desc movimentacao;
++------------------+---------------+------+-----+---------+----------------+
+| Field            | Type          | Null | Key | Default | Extra          |
++------------------+---------------+------+-----+---------+----------------+
+| id               | int(11)       | NO   | PRI | NULL    | auto_increment |
+| descricao        | text          | YES  |     | NULL    |                |
+| tipoMovimentacao | varchar(255)  | YES  |     | NULL    |                |
+| valor            | decimal(19,2) | YES  |     | NULL    |                |
+| conta_______id   | int(11)       | YES  | MUL | NULL    |                |
++------------------+---------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> desc conta;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| agencia    | varchar(255) | YES  |     | NULL    |                |
+| banco      | varchar(255) | YES  |     | NULL    |                |
+| cpf        | varchar(255) | YES  |     | NULL    |                |
+| numero     | varchar(255) | YES  |     | NULL    |                |
+| titular    | varchar(255) | YES  |     | NULL    |                |
+| cliente_id | int(11)      | NO   | UNI | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> desc cliente
+    -> ;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| id        | int(11)      | NO   | PRI | NULL    | auto_increment |
+| endereco  | varchar(255) | YES  |     | NULL    |                |
+| nome      | varchar(255) | YES  |     | NULL    |                |
+| profissao | varchar(255) | YES  |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select m.descricao, m.valor, c.cliente_id, cc.nome, cc.profissao 
+from movimentacao m 
+join conta c on c.id = m.conta_______id 
+join cliente cc on c.cliente_id = cc.id;
+
++--------------------------------------------------------------+-----------+-----------+---------+------------+----------------+--------------------------+
+| descricao                                                    | valor     | cpf       | titular | cliente_id | nome           | profissao                |
++--------------------------------------------------------------+-----------+-----------+---------+------------+----------------+--------------------------+
+| A movimentação atual refere-se á um deposito Milagroso ..... | 151099.00 | 222222222 | Arthur  |          3 | Dayane Ximenes | Promotora Senior Siemens |
++--------------------------------------------------------------+-----------+-----------+---------+------------+----------------+--------------------------+
